@@ -17,7 +17,7 @@ public class Main {
         
 //        new MainWindow();
         
-        MathParser parser = new MathParser(IOUtils.toInputStream("5x * (3 + 5) + 7x\n"));
+        MathParser parser = new MathParser(IOUtils.toInputStream("5 * \\pi * (3 + 5) + 7x\n"));
         
         SimpleNode node = parser.Start();
         
