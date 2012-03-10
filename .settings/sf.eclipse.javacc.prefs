@@ -1,0 +1,11 @@
+#Sat Mar 10 10:29:21 EST 2012
+CLEAR_CONSOLE=false
+JAVACC_OPTIONS=
+JJDOC_OPTIONS=
+JJTREE_OPTIONS=-NODE_USES_PARSER\=true -MULTI\=true -VISITOR\=true -VISITOR_EXCEPTION\=MathParserException -JJTREE_OUTPUT_DIRECTORY\=javacc
+JJ_NATURE=true
+JTB_OPTIONS=
+RUNTIME_JJJAR=/home/wspeirs/.eclipse/org.eclipse.platform_3.6.1_290601371/plugins/sf.eclipse.javacc_1.5.24/javacc.jar
+RUNTIME_JTBJAR=/home/wspeirs/.eclipse/org.eclipse.platform_3.6.1_290601371/plugins/sf.eclipse.javacc_1.5.24/jtb-1.4.4.jar
+SUPPRESS_WARNINGS=false
+eclipse.preferences.version=1
