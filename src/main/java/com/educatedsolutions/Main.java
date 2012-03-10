@@ -17,7 +17,7 @@ public class Main {
         
 //        new MainWindow();
         
-        MathParser parser = new MathParser(IOUtils.toInputStream("y\n"));
+        MathParser parser = new MathParser(IOUtils.toInputStream("9E+10\n"));
         
         SimpleNode node = parser.Start();
         
