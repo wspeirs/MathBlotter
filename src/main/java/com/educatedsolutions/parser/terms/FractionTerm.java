@@ -11,10 +11,14 @@ public class FractionTerm implements Term {
     }
 
     public String toLatexString() {
-        StringBuilder sb = new StringBuilder(fraction.getNumerator().toString());
+        StringBuilder sb = new StringBuilder();
         
-        sb.append(" \\over ");
+        sb.append("\\frac {");
+        sb.append(fraction.getNumerator().toString());
+        sb.append("}");
+        sb.append("{");
         sb.append(fraction.getDenominator().toString());
+        sb.append("}");
         
         return sb.toString();
     }

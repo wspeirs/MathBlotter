@@ -1,14 +1,8 @@
 package com.educatedsolutions;
 
-import org.apache.commons.io.IOUtils;
-
-import com.educatedsolutions.parser.PostOrderASTWalker;
-import com.educatedsolutions.parser.javacc.MathParser;
+import com.educatedsolutions.gui.MainWindow;
 import com.educatedsolutions.parser.javacc.MathParserException;
 import com.educatedsolutions.parser.javacc.ParseException;
-import com.educatedsolutions.parser.javacc.SimpleNode;
-import com.educatedsolutions.parser.terms.ASTtoTermsVisitor;
-import com.educatedsolutions.parser.terms.Term;
 
 
 public class Main {
@@ -20,8 +14,9 @@ public class Main {
      */
     public static void main(String[] args) throws ParseException, MathParserException {
         
-//        new MainWindow();
-        
+        new MainWindow();
+
+/*
         MathParser parser = new MathParser(IOUtils.toInputStream("5/4 + 3.0 / 7.4 * (3 + 4)\n"));
         
         SimpleNode node = parser.Start();
@@ -34,6 +29,7 @@ public class Main {
         Term t = walker.walk(node);
         
         System.out.println(t.toLatexString());
+*/
     }
 
 }

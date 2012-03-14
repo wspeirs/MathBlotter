@@ -10,13 +10,20 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ConsoleKeyListener implements KeyListener {
     
+    private static final Logger LOG = LoggerFactory.getLogger(ConsoleKeyListener.class);
+
     public static final String PROMPT = "> ";
     
     private final JTextPane pane;
     private final StyledDocument doc;
     private final Style regularStyle;
+    
+    private TeXUtilities texUtils = new TeXUtilities();
     
     private int iconNum = 0;
     private int startPos;
@@ -52,10 +59,11 @@ public class ConsoleKeyListener implements KeyListener {
                 final String iconName = "icon_" + iconNum;
                 final Style iconStyle = doc.addStyle(iconName, regularStyle);
                 final String line = doc.getText(startPos, caretPos - startPos);
-                final Icon texIcon = TeXUtilities.generateTeXIcon(line);
 
-                System.out.println("Line: " + startPos + " " + caretPos + " |" + line + "|");
-                
+                LOG.debug("Line: " + startPos + " " + caretPos + " |" + line + "|");
+
+                final Icon texIcon = texUtils.generateTeXIcon(line);
+
                 // set the style for the graphic
                 StyleConstants.setIcon(iconStyle, texIcon);
                 StyleConstants.setAlignment(iconStyle, StyleConstants.ALIGN_CENTER);
@@ -71,7 +79,7 @@ public class ConsoleKeyListener implements KeyListener {
                 doc.insertString(caretPos+2, PROMPT, regularStyle);
 
             } catch (BadLocationException e) {
-                e.printStackTrace();
+                LOG.debug("Bad location exception", e);
             }
             
         }
