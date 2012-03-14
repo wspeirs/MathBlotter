@@ -11,7 +11,7 @@ public class NumberTerm implements Term {
     }
 
     public String toLatexString() {
-        return null;
+        return number.toString();
     }
 
     public BigDecimal getNumber() {

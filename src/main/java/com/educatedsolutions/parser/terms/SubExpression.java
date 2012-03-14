@@ -10,7 +10,7 @@ public class SubExpression implements Term {
     }
 
     public String toLatexString() {
-        return "";
+        return "(" + term.toLatexString() + ")";
     }
 
     public Term getTerm() {

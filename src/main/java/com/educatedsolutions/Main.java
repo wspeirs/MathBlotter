@@ -22,7 +22,7 @@ public class Main {
         
 //        new MainWindow();
         
-        MathParser parser = new MathParser(IOUtils.toInputStream("3x + 2 * 5 + 7 + 5x^3 * 4/5 + 3\n"));
+        MathParser parser = new MathParser(IOUtils.toInputStream("5/4 + 3.0 / 7.4 * (3 + 4)\n"));
         
         SimpleNode node = parser.Start();
         
@@ -32,6 +32,8 @@ public class Main {
         PostOrderASTWalker walker = new PostOrderASTWalker(visitor);
         
         Term t = walker.walk(node);
+        
+        System.out.println(t.toLatexString());
     }
 
 }

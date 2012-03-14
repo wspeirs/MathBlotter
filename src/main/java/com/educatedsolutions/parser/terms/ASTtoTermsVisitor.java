@@ -137,7 +137,11 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     public Term visit(ASTAdditiveExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTAdditiveExpression");
         
-        return new SumTerm(data);   // TODO: This is wrong, fix
+        if(data.size() == 1) {
+            return data.get(0);
+        } else {
+            return new SumTerm(data);   // TODO: This is wrong, fix
+        }
     }
 
     /* (non-Javadoc)
@@ -146,7 +150,11 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     public Term visit(ASTMultiplicativeExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTMultiplicativeExpression");
         
-        return new ProductTerm(data);
+        if(data.size() == 1) {
+            return data.get(0);
+        } else {
+            return new ProductTerm(data);
+        }
     }
 
     /* (non-Javadoc)
@@ -157,14 +165,14 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         
         int dataSize = data.size();
         
-        if(dataSize != 1 && dataSize != 3) {
-            throw new MathParserException("PrimaryExpression doesn't have 1 or 3 children");
+        if(dataSize != 1) {
+            throw new MathParserException("PrimaryExpression doesn't have 1 child");
         }
         
-        if(dataSize == 1) {
-            return data.get(0);
-        } else {
+        if(node.jjtGetChild(0) instanceof ASTExpression) {
             return new SubExpression(data.get(0));
+        } else {
+            return data.get(0);
         }
     }
 
