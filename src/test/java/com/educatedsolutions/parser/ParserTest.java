@@ -19,7 +19,11 @@ public class ParserTest {
         }
         parser.ReInit(IOUtils.toInputStream(line));
         
-        return parser.Start();
+        SimpleNode ret = parser.Start();
+        
+        ret.dump("");
+        
+        return ret;
     }
     
     @Test public void integerTest() throws Exception {
@@ -30,8 +34,72 @@ public class ParserTest {
         assertNotNull(runParser("2.4"));
     }
     
-    @Test public void fractionTest() throws Exception {
-        assertNotNull(runParser("2/4"));
+    @Test public void integerUnaryTest() throws Exception {
+        assertNotNull(runParser("-2"));
+    }
+    
+    @Test public void realUnaryTest() throws Exception {
+        assertNotNull(runParser("-2.4"));
+    }
+    
+    @Test public void additionTest() throws Exception {
+        assertNotNull(runParser("2.3 + 4"));
+    }
+    
+    @Test public void subtractionTest() throws Exception {
+        assertNotNull(runParser("2 - 4.3"));
+    }
+    
+    @Test public void multiplicationTest() throws Exception {
+        assertNotNull(runParser("2 * 4.3"));
+    }
+    
+    @Test public void divisionTest() throws Exception {
+        assertNotNull(runParser("2.3/4"));
+    }
+    
+    @Test public void unaryAdditionTest() throws Exception {
+        assertNotNull(runParser("-2.3 + -4"));
+    }
+    
+    @Test public void unarySubtractionTest() throws Exception {
+        assertNotNull(runParser("-2 - -4.3"));
+    }
+    
+    @Test public void unaryMultiplicationTest() throws Exception {
+        assertNotNull(runParser("-2 * -4.3"));
+    }
+    
+    @Test public void unaryDivisionTest() throws Exception {
+        assertNotNull(runParser("-2.3/-4"));
+    }
+    
+    @Test public void subExpressionAdditionTest() throws Exception {
+        assertNotNull(runParser("(2+4.5)+(6.7+8)"));
+    }
+    
+    @Test public void subExpressionSubtractionTest() throws Exception {
+        assertNotNull(runParser("(2-4.5)-(6.7-8)"));
+    }
+    
+    @Test public void subExpressionMultiplicationTest() throws Exception {
+        assertNotNull(runParser("(2*4.5)*(6.7*8)"));
+    }
+    
+    @Test public void singleTermPoly1Test() throws Exception {
+        assertNotNull(runParser("x"));
+    }
+    
+    @Test public void singleTermPoly2Test() throws Exception {
+        assertNotNull(runParser("-3.5x"));
+    }
+    
+    @Test public void singleTermPolySquared1Test() throws Exception {
+        assertNotNull(runParser("x^2"));
+    }
+    
+    @Test public void singleTermPolySquared2Test() throws Exception {
+        assertNotNull(runParser("-3.4x^2"));
     }
     
 }

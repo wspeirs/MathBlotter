@@ -18,4 +18,7 @@ public class NumberTerm implements Term {
         return number;
     }
 
+    public void negate() {
+        number.negate();
+    }
 }

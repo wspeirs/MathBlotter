@@ -25,6 +25,7 @@ import com.educatedsolutions.parser.javacc.ASTPrimaryExpression;
 import com.educatedsolutions.parser.javacc.ASTReal;
 import com.educatedsolutions.parser.javacc.ASTStart;
 import com.educatedsolutions.parser.javacc.ASTStatement;
+import com.educatedsolutions.parser.javacc.ASTUnaryExpression;
 import com.educatedsolutions.parser.javacc.ASTVariable;
 import com.educatedsolutions.parser.javacc.MathParserException;
 import com.educatedsolutions.parser.javacc.MathParserVisitor;
@@ -41,6 +42,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.SimpleNode, java.lang.Boolean)
      */
+    @Override
     public Term visit(SimpleNode node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting SimpleNode");
         
@@ -50,6 +52,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTStart, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTStart node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTStart");
 
@@ -63,6 +66,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTStatement, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTStatement node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTStatement");
 
@@ -76,6 +80,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTEquality, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTEquality node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTEquality");
         return null;
@@ -84,6 +89,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTInequality, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTInequality node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTInequality");
         return null;
@@ -92,6 +98,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTAssignment, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTAssignment node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTAssignment");
         return null;
@@ -100,6 +107,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTExpression, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTExpression");
         
@@ -113,6 +121,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTPolynomialTerm, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTPolynomialTerm node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTPolynomialTerm");
         
@@ -134,6 +143,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTAdditiveExpression, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTAdditiveExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTAdditiveExpression");
         
@@ -147,6 +157,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTMultiplicativeExpression, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTMultiplicativeExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTMultiplicativeExpression");
         
@@ -160,6 +171,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTPrimaryExpression, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTPrimaryExpression node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTPrimaryExpression");
         
@@ -179,6 +191,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTBindingVariable, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTBindingVariable node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTBindingVariable");
         
@@ -188,6 +201,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTVariable, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTVariable node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTVariable");
         
@@ -197,6 +211,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTConstant, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTConstant node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting SimpleNode");
         
@@ -206,8 +221,25 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     }
 
     /* (non-Javadoc)
+     * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTUnaryExpression, java.lang.Boolean)
+     */
+    @Override
+    public Term visit(ASTUnaryExpression node, List<Term> data) throws MathParserException {
+        LOG.debug("Vsiting ASTNumber");
+        
+        if(data.size() != 1) {
+            throw new MathParserException("Number found without 1 child");
+        }
+        
+        ((NumberTerm)data.get(0)).negate(); // just negate the number
+        
+        return data.get(0);
+    }
+
+    /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTNumber, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTNumber node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTNumber");
         
@@ -219,21 +251,9 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     }
 
     /* (non-Javadoc)
-     * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTFraction, java.lang.Boolean)
-     */
-    public Term visit(ASTFraction node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTFraction");
-        
-        if(data.size() != 2) {
-            throw new MathParserException("Fraction found without 2 children");
-        }
-        
-        return new FractionTerm((NumberTerm)data.get(0), (NumberTerm)data.get(1));
-    }
-
-    /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTInteger, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTInteger node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTInteger");
 
@@ -247,6 +267,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTReal, java.lang.Boolean)
      */
+    @Override
     public Term visit(ASTReal node, List<Term> data) throws MathParserException {
         LOG.debug("Vsiting ASTReal");
         
