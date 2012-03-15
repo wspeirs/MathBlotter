@@ -86,6 +86,10 @@ public class ParserTest {
         assertNotNull(runParser("(2*4.5)*(6.7*8)"));
     }
     
+    @Test public void subExpressionDivisionTest() throws Exception {
+        assertNotNull(runParser("(2/4.5)/(6.7/8)"));
+    }
+    
     @Test public void singleTermPoly1Test() throws Exception {
         assertNotNull(runParser("x"));
     }
@@ -100,6 +104,54 @@ public class ParserTest {
     
     @Test public void singleTermPolySquared2Test() throws Exception {
         assertNotNull(runParser("-3.4x^2"));
+    }
+    
+    @Test public void polyAdditionTest() throws Exception {
+        assertNotNull(runParser("x + x"));
+    }
+    
+    @Test public void polySubtractionTest() throws Exception {
+        assertNotNull(runParser("x - x"));
+    }
+    
+    @Test public void polyMultiplicationTest() throws Exception {
+        assertNotNull(runParser("x * x"));
+    }
+    
+    @Test public void polyDivisionTest() throws Exception {
+        assertNotNull(runParser("x/x"));
+    }
+    
+    @Test public void unaryPolyAdditionTest() throws Exception {
+        assertNotNull(runParser("-x + -x"));
+    }
+    
+    @Test public void unaryPolySubtractionTest() throws Exception {
+        assertNotNull(runParser("-x - -x"));
+    }
+    
+    @Test public void unaryPolyMultiplicationTest() throws Exception {
+        assertNotNull(runParser("-x * -x"));
+    }
+    
+    @Test public void unaryPolyDivisionTest() throws Exception {
+        assertNotNull(runParser("-x/-x"));
+    }
+    
+    @Test public void subExpressionPolyAdditionTest() throws Exception {
+        assertNotNull(runParser("(x+y)+(y+x)"));
+    }
+    
+    @Test public void subExpressionPolySubtractionTest() throws Exception {
+        assertNotNull(runParser("(x-y)-(y-x)"));
+    }
+    
+    @Test public void subExpressionPolyMultiplicationTest() throws Exception {
+        assertNotNull(runParser("(x*y)*(y*x)"));
+    }
+    
+    @Test public void subExpressionPolyDivisionTest() throws Exception {
+        assertNotNull(runParser("(x/y)/(x/y)"));
     }
     
 }
