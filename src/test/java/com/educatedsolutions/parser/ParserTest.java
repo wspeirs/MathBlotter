@@ -42,6 +42,22 @@ public class ParserTest {
         assertNotNull(runParser("-2.4"));
     }
     
+    @Test public void variableUnaryTest() throws Exception {
+        assertNotNull(runParser("-x"));
+    }
+    
+    @Test public void integerExponentiationTest() throws Exception {
+        assertNotNull(runParser("2^3"));
+    }
+    
+    @Test public void variableExponentiationTest() throws Exception {
+        assertNotNull(runParser("x^y"));
+    }
+    
+    @Test public void expressionExponentiationTest() throws Exception {
+        assertNotNull(runParser("(2+-4)^(-x--y)"));
+    }
+    
     @Test public void additionTest() throws Exception {
         assertNotNull(runParser("2.3 + 4"));
     }
@@ -95,7 +111,7 @@ public class ParserTest {
     }
     
     @Test public void singleTermPoly2Test() throws Exception {
-        assertNotNull(runParser("-3.5x"));
+        assertNotNull(runParser("-3.5*x"));
     }
     
     @Test public void singleTermPolySquared1Test() throws Exception {
@@ -103,7 +119,7 @@ public class ParserTest {
     }
     
     @Test public void singleTermPolySquared2Test() throws Exception {
-        assertNotNull(runParser("-3.4x^2"));
+        assertNotNull(runParser("-3.4*x^2"));
     }
     
     @Test public void polyAdditionTest() throws Exception {
@@ -152,6 +168,14 @@ public class ParserTest {
     
     @Test public void subExpressionPolyDivisionTest() throws Exception {
         assertNotNull(runParser("(x/y)/(x/y)"));
+    }
+    
+    @Test public void assignmentTest() throws Exception {
+        assertNotNull(runParser("A := 2 + 3"));
+    }
+    
+    @Test (expected=ParseException.class) public void assignmentFailTest() throws Exception {
+        assertNotNull(runParser("x := 2 + 3"));
     }
     
 }
