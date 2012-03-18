@@ -1,6 +1,8 @@
 package com.educatedsolutions.gui;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,7 @@ import javax.swing.JTextPane;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+import javax.swing.text.Utilities;
 
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -52,11 +55,24 @@ public class MainWindow extends JFrame implements WindowListener {
         editorScrollPane.setMinimumSize(new Dimension(10, 10));
 
         add(editorScrollPane);
-        pack();
+        this.setBounds(getCenteredWindow(600, 550));
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public static Rectangle getCenteredWindow(int width, int height) {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Rectangle rec = ge.getScreenDevices()[0].getDefaultConfiguration().getBounds();
+        Rectangle ret = new Rectangle();
+        
+        ret.x = (rec.width/2) - (width/2);
+        ret.y = (rec.height/2) - (height/2);
+        ret.width = width;
+        ret.height = height;
+    
+        return ret;
+    }
+    
     public void windowActivated(WindowEvent arg0) {
     }
 
