@@ -13,7 +13,7 @@ public class ParserTest {
     
     private MathParser parser = new MathParser(IOUtils.toInputStream(""));
 
-    SimpleNode runParser(String line) throws ParseException {
+    protected Object runParser(String line) throws ParseException {
         if(!line.endsWith("\n")) {
             line = line + "\n";
         }
@@ -170,12 +170,12 @@ public class ParserTest {
         assertNotNull(runParser("(x/y)/(x/y)"));
     }
     
-    @Test public void assignmentTest() throws Exception {
+/*    @Test public void assignmentTest() throws Exception {
         assertNotNull(runParser("A := 2 + 3"));
     }
     
     @Test (expected=ParseException.class) public void assignmentFailTest() throws Exception {
         assertNotNull(runParser("x := 2 + 3"));
     }
-    
+*/    
 }

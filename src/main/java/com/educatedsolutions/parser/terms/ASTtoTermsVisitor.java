@@ -14,13 +14,13 @@ import com.educatedsolutions.parser.javacc.ASTAssignment;
 import com.educatedsolutions.parser.javacc.ASTBindingVariable;
 import com.educatedsolutions.parser.javacc.ASTConstant;
 import com.educatedsolutions.parser.javacc.ASTEquality;
+import com.educatedsolutions.parser.javacc.ASTEquationVariable;
+import com.educatedsolutions.parser.javacc.ASTExponentiationExpression;
 import com.educatedsolutions.parser.javacc.ASTExpression;
-import com.educatedsolutions.parser.javacc.ASTFraction;
 import com.educatedsolutions.parser.javacc.ASTInequality;
 import com.educatedsolutions.parser.javacc.ASTInteger;
 import com.educatedsolutions.parser.javacc.ASTMultiplicativeExpression;
 import com.educatedsolutions.parser.javacc.ASTNumber;
-import com.educatedsolutions.parser.javacc.ASTPolynomialTerm;
 import com.educatedsolutions.parser.javacc.ASTPrimaryExpression;
 import com.educatedsolutions.parser.javacc.ASTReal;
 import com.educatedsolutions.parser.javacc.ASTStart;
@@ -44,7 +44,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(SimpleNode node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting SimpleNode");
+        LOG.debug("Visiting SimpleNode");
         
         return null;
     }
@@ -54,7 +54,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTStart node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTStart");
+        LOG.debug("Visiting ASTStart");
 
         if(data.size() != 1) {
             throw new MathParserException("Start has more than 1 child");
@@ -68,7 +68,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTStatement node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTStatement");
+        LOG.debug("Visiting ASTStatement");
 
         if(data.size() != 1) {
             throw new MathParserException("Statement has more than 1 child");
@@ -82,7 +82,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTEquality node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTEquality");
+        LOG.debug("Visiting ASTEquality");
         return null;
     }
 
@@ -91,7 +91,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTInequality node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTInequality");
+        LOG.debug("Visiting ASTInequality");
         return null;
     }
 
@@ -100,7 +100,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTAssignment node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTAssignment");
+        LOG.debug("Visiting ASTAssignment");
         return null;
     }
 
@@ -109,7 +109,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTExpression node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTExpression");
+        LOG.debug("Visiting ASTExpression");
         
         if(data.size() != 1) {
             throw new MathParserException("Expression has more than 1 child");
@@ -119,33 +119,11 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     }
 
     /* (non-Javadoc)
-     * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTPolynomialTerm, java.lang.Boolean)
-     */
-    @Override
-    public Term visit(ASTPolynomialTerm node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTPolynomialTerm");
-        
-        int numChildren = node.jjtGetNumChildren();
-        
-        if(data.size() < 2 || numChildren < 2) {
-            throw new MathParserException("Not enough children to make a polynomial");
-        }
-        
-        if(numChildren == 2) {
-            return new PolynomialTerm((NumberTerm) data.get(0), ((SimpleNode)node.jjtGetChild(1)).getImage());
-        } else {
-            return new PolynomialTerm((NumberTerm) data.get(0),
-                                      ((SimpleNode)node.jjtGetChild(1)).getImage(),
-                                      (NumberTerm) data.get(2));
-        }
-    }
-
-    /* (non-Javadoc)
      * @see com.educatedsolutions.parser.javacc.MathParserVisitor#visit(com.educatedsolutions.parser.javacc.ASTAdditiveExpression, java.lang.Boolean)
      */
     @Override
     public Term visit(ASTAdditiveExpression node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTAdditiveExpression");
+        LOG.debug("Visiting ASTAdditiveExpression");
         
         if(data.size() == 1) {
             return data.get(0);
@@ -159,7 +137,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTMultiplicativeExpression node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTMultiplicativeExpression");
+        LOG.debug("Visiting ASTMultiplicativeExpression");
         
         if(data.size() == 1) {
             return data.get(0);
@@ -173,7 +151,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTPrimaryExpression node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTPrimaryExpression");
+        LOG.debug("Visiting ASTPrimaryExpression");
         
         int dataSize = data.size();
         
@@ -193,7 +171,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTBindingVariable node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTBindingVariable");
+        LOG.debug("Visiting ASTBindingVariable");
         
         return null;    // don't need to do anything
     }
@@ -203,9 +181,9 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTVariable node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTVariable");
+        LOG.debug("Visiting ASTVariable");
         
-        return null;    // don't need to do anything
+        return data.get(0);
     }
 
     /* (non-Javadoc)
@@ -213,7 +191,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTConstant node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting SimpleNode");
+        LOG.debug("Visiting SimpleNode");
         
         throw new MathParserException("Not implemented");
         
@@ -225,13 +203,13 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTUnaryExpression node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTNumber");
+        LOG.debug("Visiting ASTNumber");
         
         if(data.size() != 1) {
             throw new MathParserException("Number found without 1 child");
         }
         
-        ((NumberTerm)data.get(0)).negate(); // just negate the number
+        ((ValueTerm)data.get(0)).setNegative(true);
         
         return data.get(0);
     }
@@ -241,7 +219,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTNumber node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTNumber");
+        LOG.debug("Visiting ASTNumber");
         
         if(data.size() != 1) {
             throw new MathParserException("Number found without 1 child");
@@ -255,7 +233,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTInteger node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTInteger");
+        LOG.debug("Visiting ASTInteger");
 
         if(data.size() != 0) {
             throw new MathParserException("Real found with children");
@@ -269,13 +247,29 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
      */
     @Override
     public Term visit(ASTReal node, List<Term> data) throws MathParserException {
-        LOG.debug("Vsiting ASTReal");
+        LOG.debug("Visiting ASTReal");
         
         if(data.size() != 0) {
             throw new MathParserException("Real found with children");
         }
         
         return new NumberTerm(((SimpleNode)node).getImage());
+    }
+
+    @Override
+    public Term visit(ASTExponentiationExpression node, List<Term> data) throws MathParserException {
+        LOG.debug("Visiting ExponentialExpression");
+        
+        if(data.size() == 2) {
+            return new ExponentTerm(data.get(0), data.get(1));
+        } else {
+            return data.get(0);
+        }
+    }
+
+    @Override
+    public Term visit(ASTEquationVariable node, List<Term> data) throws MathParserException {
+        return new VariableTerm(((SimpleNode)node).getImage());
     }
 
 }

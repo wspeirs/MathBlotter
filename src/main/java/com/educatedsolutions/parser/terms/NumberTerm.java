@@ -2,7 +2,7 @@ package com.educatedsolutions.parser.terms;
 
 import java.math.BigDecimal;
 
-public class NumberTerm implements Term {
+public class NumberTerm extends ValueTerm implements Term {
     
     private BigDecimal number;
     
@@ -11,14 +11,10 @@ public class NumberTerm implements Term {
     }
 
     public String toLatexString() {
-        return number.toString();
+        return super.toLatexString() + number.toString();
     }
 
     public BigDecimal getNumber() {
         return number;
-    }
-
-    public void negate() {
-        number.negate();
     }
 }
