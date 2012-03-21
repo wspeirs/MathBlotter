@@ -1,11 +1,11 @@
 package com.educatedsolutions.parser.terms;
 
 
-public class SubExpression implements Term {
+public class SubExpressionTerm implements Term {
     
     private Term term;
     
-    public SubExpression(Term term) {
+    public SubExpressionTerm(Term term) {
         this.term = term;
     }
 

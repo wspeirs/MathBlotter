@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.educatedsolutions.parser.terms;
+package com.educatedsolutions.parser;
 
 
 import java.util.List;
@@ -30,6 +30,14 @@ import com.educatedsolutions.parser.javacc.ASTVariable;
 import com.educatedsolutions.parser.javacc.MathParserException;
 import com.educatedsolutions.parser.javacc.MathParserVisitor;
 import com.educatedsolutions.parser.javacc.SimpleNode;
+import com.educatedsolutions.parser.terms.ExponentTerm;
+import com.educatedsolutions.parser.terms.NumberTerm;
+import com.educatedsolutions.parser.terms.ProductTerm;
+import com.educatedsolutions.parser.terms.SubExpressionTerm;
+import com.educatedsolutions.parser.terms.SumTerm;
+import com.educatedsolutions.parser.terms.Term;
+import com.educatedsolutions.parser.terms.ValueTerm;
+import com.educatedsolutions.parser.terms.VariableTerm;
 
 /**
  * @author wspeirs
@@ -160,7 +168,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         }
         
         if(node.jjtGetChild(0) instanceof ASTExpression) {
-            return new SubExpression(data.get(0));
+            return new SubExpressionTerm(data.get(0));
         } else {
             return data.get(0);
         }
