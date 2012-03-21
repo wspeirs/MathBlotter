@@ -1,5 +1,7 @@
 package com.educatedsolutions.parser.terms;
 
+import java.util.List;
+
 public class ExponentTerm implements Term {
     
     private Term base;
@@ -13,6 +15,11 @@ public class ExponentTerm implements Term {
     @Override
     public String toLatexString() {
         return base.toLatexString() + "^{" + exponent.toLatexString() + "}";
+    }
+    
+    @Override
+    public Term accept(TermVisitor visitor, List<Term> children) {
+        return visitor.visit(this, children);
     }
 
     public Term getBase() {

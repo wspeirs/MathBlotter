@@ -12,12 +12,12 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.educatedsolutions.parser.ASTtoTermsVisitor;
 import com.educatedsolutions.parser.PostOrderASTWalker;
 import com.educatedsolutions.parser.javacc.MathParser;
 import com.educatedsolutions.parser.javacc.MathParserException;
 import com.educatedsolutions.parser.javacc.ParseException;
 import com.educatedsolutions.parser.javacc.SimpleNode;
-import com.educatedsolutions.parser.terms.ASTtoTermsVisitor;
 import com.educatedsolutions.parser.terms.Term;
 
 public class TeXUtilities {

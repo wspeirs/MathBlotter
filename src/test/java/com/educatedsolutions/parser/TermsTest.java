@@ -1,15 +1,26 @@
 package com.educatedsolutions.parser;
 
-import com.educatedsolutions.gui.TeXUtilities;
-import com.educatedsolutions.parser.javacc.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.educatedsolutions.parser.javacc.SimpleNode;
+import com.educatedsolutions.parser.terms.Term;
 
 public class TermsTest extends ParserTest {
-    
-    private TeXUtilities utils = new TeXUtilities();
+    private static final Logger LOG = LoggerFactory.getLogger(TermsTest.class);
 
-    protected Object runParser(String line) throws ParseException {
-        String ret = utils.inputToLatex(line);
+    private ASTtoTermsVisitor visitor = new ASTtoTermsVisitor();
+    private PostOrderASTWalker walker = new PostOrderASTWalker(visitor);
+
+    protected Object runParser(String line) throws Exception {
+        SimpleNode node = (SimpleNode) super.runParser(line);
+
+        Term term = walker.walk(node);
         
-        return ret;
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("LATEX: " + term.toLatexString());
+        }
+        
+        return term;
     }
 }

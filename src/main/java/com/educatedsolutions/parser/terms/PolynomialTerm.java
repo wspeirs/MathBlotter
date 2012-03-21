@@ -1,5 +1,7 @@
 package com.educatedsolutions.parser.terms;
 
+import java.util.List;
+
 import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
 public class PolynomialTerm implements Term {
@@ -34,6 +36,7 @@ public class PolynomialTerm implements Term {
         this.variable = variable;
     }
 
+    @Override
     public String toLatexString() {
         StringBuilder sb = new StringBuilder(coefficients[coefficients.length-1] + "");
         
@@ -58,6 +61,11 @@ public class PolynomialTerm implements Term {
         sb.append(coefficients[0]);
         
         return poly.toString();
+    }
+
+    @Override
+    public Term accept(TermVisitor visitor, List<Term> children) {
+        return visitor.visit(this, children);
     }
 
     public PolynomialFunction getPoly() {

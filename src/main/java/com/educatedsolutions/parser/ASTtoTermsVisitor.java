@@ -54,7 +54,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
     public Term visit(SimpleNode node, List<Term> data) throws MathParserException {
         LOG.debug("Visiting SimpleNode");
         
-        return null;
+        throw new MathParserException("Visiting SimpleNode");
     }
 
     /* (non-Javadoc)

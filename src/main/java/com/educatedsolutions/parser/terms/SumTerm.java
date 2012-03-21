@@ -10,6 +10,7 @@ public class SumTerm implements Term {
         this.terms = terms;
     }
     
+    @Override
     public String toLatexString() {
         StringBuilder sb = new StringBuilder(terms.get(0).toLatexString());
         
@@ -19,6 +20,11 @@ public class SumTerm implements Term {
         }
         
         return sb.toString();
+    }
+
+    @Override
+    public Term accept(TermVisitor visitor, List<Term> children) {
+        return visitor.visit(this, children);
     }
 
     public List<Term> getTerms() {

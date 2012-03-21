@@ -13,7 +13,7 @@ public class ParserTest {
     
     private MathParser parser = new MathParser(IOUtils.toInputStream(""));
 
-    protected Object runParser(String line) throws ParseException {
+    protected Object runParser(String line) throws Exception {
         if(!line.endsWith("\n")) {
             line = line + "\n";
         }

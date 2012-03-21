@@ -38,7 +38,7 @@ public class ConsoleKeyListener implements KeyListener {
             doc.insertString(0, ConsoleKeyListener.PROMPT, regularStyle);
             pane.setCaretPosition(PROMPT.length());
         } catch (BadLocationException e) {
-            e.printStackTrace();
+            LOG.error("Bad location: {}", e.getMessage());
         }
 
     }
