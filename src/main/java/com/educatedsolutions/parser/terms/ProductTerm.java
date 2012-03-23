@@ -42,4 +42,7 @@ public class ProductTerm implements Term {
         return terms;
     }
 
+    public String getOperations() {
+        return operations;
+    }
 }

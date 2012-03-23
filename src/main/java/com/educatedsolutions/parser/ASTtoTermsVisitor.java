@@ -4,6 +4,7 @@
 package com.educatedsolutions.parser;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -36,7 +37,6 @@ import com.educatedsolutions.parser.terms.ProductTerm;
 import com.educatedsolutions.parser.terms.SubExpressionTerm;
 import com.educatedsolutions.parser.terms.SumTerm;
 import com.educatedsolutions.parser.terms.Term;
-import com.educatedsolutions.parser.terms.ValueTerm;
 import com.educatedsolutions.parser.terms.VariableTerm;
 
 /**
@@ -216,10 +216,13 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         if(data.size() != 1) {
             throw new MathParserException("Number found without 1 child");
         }
+
+        List<Term> terms = new ArrayList<Term>(2);
         
-        ((ValueTerm)data.get(0)).setNegative(true);
+        terms.add(NumberTerm.NEGATIVE_ONE);
+        terms.add(data.get(0)); // variable or number
         
-        return data.get(0);
+        return new ProductTerm(terms, "*");
     }
 
     /* (non-Javadoc)

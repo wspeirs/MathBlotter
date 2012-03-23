@@ -2,7 +2,7 @@ package com.educatedsolutions.parser.terms;
 
 import java.util.List;
 
-public class VariableTerm extends ValueTerm implements Term {
+public class VariableTerm implements Term {
     
     private String variable;
     
@@ -12,7 +12,7 @@ public class VariableTerm extends ValueTerm implements Term {
 
     @Override
     public String toLatexString() {
-        return super.toLatexString() + variable;
+        return variable;
     }
 
     @Override

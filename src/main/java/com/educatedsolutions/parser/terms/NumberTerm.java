@@ -1,23 +1,31 @@
 package com.educatedsolutions.parser.terms;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-public class NumberTerm extends ValueTerm implements Term {
+public class NumberTerm implements Term {
     
-    private BigDecimal number;
+    private double number;
+    private boolean isInteger;
+    
+    public static final NumberTerm NEGATIVE_ONE = new NumberTerm("-1");
     
     public NumberTerm(String number) {
-        this.number = new BigDecimal(number);
+        this.number = Double.parseDouble(number);
+        isInteger = Math.floor(this.number) == this.number;
     }
 
-    public NumberTerm(BigDecimal number) {
+    public NumberTerm(double number) {
         this.number = number;
+        isInteger = Math.floor(this.number) == this.number;
     }
 
     @Override
     public String toLatexString() {
-        return super.toLatexString() + number.toString();
+        if(isInteger) {
+            return ((int)number) + "";
+        } else {
+            return number + "";
+        }
     }
     
     @Override
@@ -25,7 +33,11 @@ public class NumberTerm extends ValueTerm implements Term {
         return visitor.visit(this, children);
     }
 
-    public BigDecimal getNumber() {
+    public double getNumber() {
         return number;
+    }
+    
+    public boolean isInteger() {
+        return isInteger;
     }
 }

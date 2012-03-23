@@ -32,5 +32,9 @@ public class SumTerm implements Term {
     public List<Term> getTerms() {
         return terms;
     }
+    
+    public String getOperations() {
+        return operations;
+    }
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
+import com.educatedsolutions.parser.javacc.MathParserException;
+
 public class PolynomialTerm implements Term {
     
     private PolynomialFunction poly;
@@ -14,22 +16,26 @@ public class PolynomialTerm implements Term {
         coefficients = new double[2];
         
         coefficients[0] = 0;
-        coefficients[1] = number.getNumber().doubleValue();
+        coefficients[1] = number.getNumber();
         
         this.poly = new PolynomialFunction(coefficients);
         
         this.variable = variable.trim();
     }
     
-    public PolynomialTerm(NumberTerm number, String variable, NumberTerm exponent) {
-        int order = exponent.getNumber().intValueExact() + 1;
+    public PolynomialTerm(NumberTerm number, String variable, NumberTerm exponent) throws MathParserException {
+        if(!exponent.isInteger()) {
+            throw new MathParserException("Exponents must be integers");
+        }
+        
+        int order = (int) exponent.getNumber();
         coefficients = new double[order];
         
         for(int i=0; i < order-1; ++i) {
             coefficients[i] = 0;
         }
         
-        coefficients[order-1] = number.getNumber().doubleValue();
+        coefficients[order-1] = number.getNumber();
         
         this.poly = new PolynomialFunction(coefficients);
         

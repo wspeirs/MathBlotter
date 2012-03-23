@@ -25,7 +25,8 @@ public class TermsTest {
         Term term = toTerms(node);
         
         String ret = term.toLatexString();
-        LOG.debug(ret);
+        
+        LOG.debug("TERMS: {} -> {}", line, ret);
         
         return ret;
     }
@@ -42,8 +43,16 @@ public class TermsTest {
         assertEquals("x+y", runTest("x+y"));
     }
     
+    @Test public void variableUnaryTest() throws Exception {
+        assertEquals("-1*x", runTest("-x"));
+    }
+    
+    @Test public void integerUnaryTest() throws Exception {
+        assertEquals("-1*2", runTest("-2"));
+    }
+    
     @Test public void expressionExponentiationTest() throws Exception {
-        assertEquals("(2+-4)^{(-x--y)}", runTest("(2+-4)^(-x--y)"));
+        assertEquals("(2+-1*4)^{(-1*x--1*y)}", runTest("(2+-4)^(-x--y)"));
     }
     
     @Test public void divisionTest() throws Exception {
