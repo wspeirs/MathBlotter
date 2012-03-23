@@ -5,18 +5,29 @@ import java.util.List;
 public class ProductTerm implements Term {
     
     private List<Term> terms;
+    private String operations;
     
-    public ProductTerm(List<Term> terms) {
+    public ProductTerm(List<Term> terms, String operations) {
         this.terms = terms;
+        this.operations = operations;
     }
 
     @Override
     public String toLatexString() {
-        StringBuilder sb = new StringBuilder(terms.get(0).toLatexString());
+        StringBuilder sb = new StringBuilder();
         
-        for(int i=1; i < terms.size(); ++i) {
-            sb.append(" * ");
-            sb.append(terms.get(i).toLatexString());
+        for(int i=0; i < operations.length(); ++i) {
+            if(operations.charAt(i) == '/') {
+                sb.append("\\frac{");
+                sb.append(terms.get(i).toLatexString());
+                sb.append("}{");
+                sb.append(terms.get(i+1).toLatexString());
+                sb.append("}");
+            } else {
+                sb.append(terms.get(i).toLatexString());
+                sb.append("*");
+                sb.append(terms.get(i+1).toLatexString());
+            }
         }
         
         return sb.toString();

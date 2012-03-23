@@ -136,7 +136,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         if(data.size() == 1) {
             return data.get(0);
         } else {
-            return new SumTerm(data);   // TODO: This is wrong, fix
+            return new SumTerm(data, node.getImage());   // TODO: This is wrong, fix
         }
     }
 
@@ -150,7 +150,7 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         if(data.size() == 1) {
             return data.get(0);
         } else {
-            return new ProductTerm(data);
+            return new ProductTerm(data, node.getImage());
         }
     }
 

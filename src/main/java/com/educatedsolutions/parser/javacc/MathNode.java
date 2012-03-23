@@ -2,7 +2,7 @@ package com.educatedsolutions.parser.javacc;
 
 
 public class MathNode {
-    private String image;
+    private String image = "";
 
     public String getImage() {
         return image;
@@ -13,6 +13,14 @@ public class MathNode {
     }
     
     public void setImage(Token t) {
-        this.image = t.image;
+        setImage(t.image);
+    }
+    
+    public void appendImage(String image) {
+        this.image = this.image + image;
+    }
+    
+    public void appendImage(Token t) {
+        appendImage(t.image);
     }
 }

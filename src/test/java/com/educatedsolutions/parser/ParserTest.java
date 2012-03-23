@@ -6,14 +6,13 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.educatedsolutions.parser.javacc.MathParser;
-import com.educatedsolutions.parser.javacc.ParseException;
 import com.educatedsolutions.parser.javacc.SimpleNode;
 
 public class ParserTest {
     
-    private MathParser parser = new MathParser(IOUtils.toInputStream(""));
-
-    protected Object runParser(String line) throws Exception {
+    public static SimpleNode runParser(String line) throws Exception {
+        MathParser parser = new MathParser(IOUtils.toInputStream(""));
+        
         if(!line.endsWith("\n")) {
             line = line + "\n";
         }

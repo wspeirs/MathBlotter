@@ -5,9 +5,11 @@ import java.util.List;
 public class SumTerm implements Term {
 
     private List<Term> terms;
+    private String operations;
     
-    public SumTerm(List<Term> terms) {
+    public SumTerm(List<Term> terms, String operations) {
         this.terms = terms;
+        this.operations = operations;
     }
     
     @Override
@@ -15,7 +17,7 @@ public class SumTerm implements Term {
         StringBuilder sb = new StringBuilder(terms.get(0).toLatexString());
         
         for(int i=1; i < terms.size(); ++i) {
-            sb.append(" + ");
+            sb.append(operations.charAt(i-1));
             sb.append(terms.get(i).toLatexString());
         }
         
