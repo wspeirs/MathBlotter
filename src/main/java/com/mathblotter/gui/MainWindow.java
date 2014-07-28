@@ -14,7 +14,6 @@ import javax.swing.JTextPane;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
-import javax.swing.text.Utilities;
 
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -23,28 +22,28 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public class MainWindow extends JFrame implements WindowListener {
 
     private static final long serialVersionUID = 1L;
-    
+
     public MainWindow() {
         super("Math");
-        
+
         this.addWindowListener(this);
-        
+
         String math = "x^2 + 3x + 7";
 
         TeXFormula fomule = new TeXFormula(math);
         TeXIcon ti = fomule.createTeXIcon(TeXConstants.STYLE_DISPLAY, 30);
         BufferedImage b = new BufferedImage(ti.getIconWidth(), ti.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-        ti.paintIcon(new JLabel(), b.getGraphics(), 0, 0);    
+        ti.paintIcon(new JLabel(), b.getGraphics(), 0, 0);
 
         JTextPane textPane = new JTextPane();
         Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
         Style regular = textPane.addStyle("regular", def);
-        
+
         // set the font for the text
         StyleConstants.setFontFamily(regular, "Courier New");
         StyleConstants.setFontSize(regular, 14);
         textPane.setLogicalStyle(regular);
-        
+
         textPane.setEditable(true);
         textPane.addKeyListener(new ConsoleKeyListener(textPane, regular));
 
@@ -64,34 +63,41 @@ public class MainWindow extends JFrame implements WindowListener {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle rec = ge.getScreenDevices()[0].getDefaultConfiguration().getBounds();
         Rectangle ret = new Rectangle();
-        
+
         ret.x = (rec.width/2) - (width/2);
         ret.y = (rec.height/2) - (height/2);
         ret.width = width;
         ret.height = height;
-    
+
         return ret;
     }
-    
+
+    @Override
     public void windowActivated(WindowEvent arg0) {
     }
 
+    @Override
     public void windowClosed(WindowEvent arg0) {
     }
 
+    @Override
     public void windowClosing(WindowEvent arg0) {
         this.dispose();
     }
 
+    @Override
     public void windowDeactivated(WindowEvent arg0) {
     }
 
+    @Override
     public void windowDeiconified(WindowEvent arg0) {
     }
 
+    @Override
     public void windowIconified(WindowEvent arg0) {
     }
 
+    @Override
     public void windowOpened(WindowEvent arg0) {
     }
 
