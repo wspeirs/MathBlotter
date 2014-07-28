@@ -3,6 +3,97 @@
   <groupId>com.educatedsolutions</groupId>
   <artifactId>Math</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <name>Math Blotter</name>
+  <url>www.mathblotter.com</url>
+  <description>An attempt at a clone of Maple/Mathematica</description>
+  <build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.1</version>
+      <configuration>
+        <source>1.7</source>
+        <target>1.7</target>
+      </configuration>
+    </plugin>
+    <plugin>
+      <artifactId>maven-clean-plugin</artifactId>
+      <version>2.5</version>
+      <configuration>
+        <filesets>
+          <fileset>
+            <directory>src/main/java/com/mathblotter/parser/javacc</directory>
+            <includes>
+              <include>**/*.java</include>
+            </includes>
+            <followSymlinks>false</followSymlinks>
+          </fileset>
+        </filesets>
+      </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>javacc-maven-plugin</artifactId>
+      <version>2.6</version>
+      <executions>
+        <execution>
+          <id>jjtree-javacc</id>
+          <goals>
+            <goal>jjtree-javacc</goal>
+          </goals>
+          <configuration>
+            <javaUnicodeEscape>true</javaUnicodeEscape>
+            <!-- <errorReporting>false</errorReporting> -->
+            <nodeClass>com.mathblotter.parser.MathNode</nodeClass>
+            <isStatic>false</isStatic>
+            <visitor>true</visitor>
+            <visitorException>com.mathblotter.parser.MathParserException</visitorException>
+            <visitorDataType>java.util.List&lt;com.mathblotter.parser.terms.Term&gt;</visitorDataType>
+            <!-- <visitorDataType>Boolean</visitorDataType> -->
+            <!-- <visitorReturnType>com.mathblotter.grammar.ASTWalker.WalkType</visitorReturnType> -->
+            <visitorReturnType>com.mathblotter.parser.terms.Term</visitorReturnType>
+            <nodeUsesParser>true</nodeUsesParser>
+            <multi>true</multi>
+            <buildNodeFiles>true</buildNodeFiles>
+            <interimDirectory>${basedir}/src/main/java</interimDirectory>
+            <outputDirectory>${basedir}/src/main/java</outputDirectory>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+  <pluginManagement>
+  	<plugins>
+  		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+  		<plugin>
+  			<groupId>org.eclipse.m2e</groupId>
+  			<artifactId>lifecycle-mapping</artifactId>
+  			<version>1.0.0</version>
+  			<configuration>
+  				<lifecycleMappingMetadata>
+  					<pluginExecutions>
+  						<pluginExecution>
+  							<pluginExecutionFilter>
+  								<groupId>org.codehaus.mojo</groupId>
+  								<artifactId>
+  									javacc-maven-plugin
+  								</artifactId>
+  								<versionRange>[2.6,)</versionRange>
+  								<goals>
+  									<goal>jjtree-javacc</goal>
+  								</goals>
+  							</pluginExecutionFilter>
+  							<action>
+  								<ignore></ignore>
+  							</action>
+  						</pluginExecution>
+  					</pluginExecutions>
+  				</lifecycleMappingMetadata>
+  			</configuration>
+  		</plugin>
+  	</plugins>
+  </pluginManagement>
+  </build>
   <dependencies>
   	<dependency>
   		<groupId>org.scilab.forge</groupId>
