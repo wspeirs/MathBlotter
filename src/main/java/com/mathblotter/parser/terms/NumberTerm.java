@@ -2,13 +2,11 @@ package com.mathblotter.parser.terms;
 
 import java.util.List;
 
-public class NumberTerm implements Term {
-    
+public class NumberTerm implements NegatableTerm {
+
     private double number;
     private boolean isInteger;
-    
-    public static final NumberTerm NEGATIVE_ONE = new NumberTerm("-1");
-    
+
     public NumberTerm(String number) {
         this.number = Double.parseDouble(number);
         isInteger = Math.floor(this.number) == this.number;
@@ -27,7 +25,7 @@ public class NumberTerm implements Term {
             return number + "";
         }
     }
-    
+
     @Override
     public Term accept(TermVisitor visitor, List<Term> children) {
         return visitor.visit(this, children);
@@ -36,8 +34,20 @@ public class NumberTerm implements Term {
     public double getNumber() {
         return number;
     }
-    
+
     public boolean isInteger() {
         return isInteger;
+    }
+
+    @Override
+    public NegatableTerm negate() {
+        number *= -1;
+
+        return this;
+    }
+
+    @Override
+    public boolean isNegative() {
+        return number < 0;
     }
 }

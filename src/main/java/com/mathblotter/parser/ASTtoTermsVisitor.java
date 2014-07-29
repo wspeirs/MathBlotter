@@ -4,7 +4,6 @@
 package com.mathblotter.parser;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,6 +30,7 @@ import com.mathblotter.parser.javacc.ASTVariable;
 import com.mathblotter.parser.javacc.MathParserVisitor;
 import com.mathblotter.parser.javacc.SimpleNode;
 import com.mathblotter.parser.terms.ExponentTerm;
+import com.mathblotter.parser.terms.NegatableTerm;
 import com.mathblotter.parser.terms.NumberTerm;
 import com.mathblotter.parser.terms.ProductTerm;
 import com.mathblotter.parser.terms.SubExpressionTerm;
@@ -213,15 +213,16 @@ public class ASTtoTermsVisitor implements MathParserVisitor {
         LOG.debug("Visiting ASTNumber");
 
         if(data.size() != 1) {
-            throw new MathParserException("Number found without 1 child");
+            throw new MathParserException("Negative found without child");
         }
 
-        List<Term> terms = new ArrayList<Term>(2);
+        final Term term = data.get(0);
 
-        terms.add(NumberTerm.NEGATIVE_ONE);
-        terms.add(data.get(0)); // variable or number
-
-        return new ProductTerm(terms, "*");
+        if(term instanceof NegatableTerm) {
+            return ((NegatableTerm) term).negate();
+        } else {
+            throw new MathParserException("Found non-negatable term in unary expression");
+        }
     }
 
     /* (non-Javadoc)

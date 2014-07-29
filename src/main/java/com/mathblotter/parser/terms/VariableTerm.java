@@ -2,17 +2,18 @@ package com.mathblotter.parser.terms;
 
 import java.util.List;
 
-public class VariableTerm implements Term {
-    
+public class VariableTerm implements NegatableTerm {
+
     private String variable;
-    
+    private boolean isNegative;
+
     public VariableTerm(String variable) {
         this.variable = variable;
     }
 
     @Override
     public String toLatexString() {
-        return variable;
+        return isNegative ? "-" + variable : variable;
     }
 
     @Override
@@ -22,6 +23,18 @@ public class VariableTerm implements Term {
 
     public String getVarible() {
         return variable;
+    }
+
+    @Override
+    public NegatableTerm negate() {
+        isNegative = isNegative ? false : true;
+
+        return this;
+    }
+
+    @Override
+    public boolean isNegative() {
+        return isNegative;
     }
 
 }
